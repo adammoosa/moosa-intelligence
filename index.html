@@ -9,7 +9,195 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=PT+Sans+Caption:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<style>
+:root{--red:#e30016;--orange:#ff7a2e;--purple:#370c5e;--yellow:#feda45;--ink:#333;--mut:#6b6b6b;--line:#ececec;--bg:#fff;--alt:#f7f7f8;--r:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4,h5{margin:0;line-height:1.15}
+a{color:inherit}
+.muted{color:var(--mut);font-size:13px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:baseline;gap:8px;text-decoration:none}
+.logo-img{display:block;height:30px;width:auto;align-self:center}
+.logo-txt{display:none;font-weight:900;font-size:22px;color:var(--red);letter-spacing:.5px}
+.brand-sub{font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
+.links{display:flex;gap:20px;margin-left:auto}
+.links a{font-size:13px;font-weight:500;text-decoration:none;color:var(--ink)}
+.links a:hover{color:var(--red)}
+.role{font-size:12px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.role select{font:inherit;font-size:12px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:700;font-size:14px;padding:13px 24px;border-radius:999px;background:var(--red);color:#fff;border:2px solid var(--red);text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(227,0,22,.6)}
+.btn-sm{padding:8px 16px;font-size:13px}
+.btn-ghost{background:#fff;color:var(--red)}
+.btn-ghost:hover{background:#fff4f5}
+.btn-white{background:#fff;color:var(--red);border-color:#fff}
+.btn-outline{background:transparent;color:#fff;border-color:#fff}
+.link{background:none;border:0;font:inherit;font-size:12px;color:var(--mut);text-decoration:underline;cursor:pointer}
+
+/* hero */
+.hero{position:relative;padding:64px 0 0;background:linear-gradient(180deg,#fff 0%,#fff 60%,#fdf3f4 100%)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--purple);margin:0 0 14px}
+.hero h1{font-weight:900;font-size:clamp(32px,6vw,68px);text-transform:uppercase;letter-spacing:-.01em}
+.hero h1 span{color:var(--red)}
+.lead{max-width:640px;font-size:clamp(15px,1.6vw,18px);color:#555;margin:20px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.badge-demo{display:inline-block;margin:22px 0 14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--yellow);color:var(--ink);padding:4px 10px;border-radius:6px;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:0 6px 24px -14px rgba(0,0,0,.25)}
+.kpi span{display:block;font-size:12px;color:var(--mut);font-weight:500}
+.kpi b{display:block;font-size:clamp(26px,3vw,36px);font-weight:900;margin:4px 0 2px;letter-spacing:-.01em}
+.kpi small{font-size:12px;color:var(--mut)}
+.kpi-alert b{color:var(--red)}
+.kpi-sm b{font-size:30px;color:var(--purple)}
+.dna{height:40px;margin-top:40px;overflow:hidden}
+.dna svg{width:100%;height:100%;display:block}
+
+/* sections */
+.sec{padding:56px 0}
+.sec-alt{background:var(--alt)}
+.sec-h{margin-bottom:24px}
+.sec-h h2{font-weight:900;font-size:clamp(24px,3vw,34px)}
+.sec-h p{margin:8px 0 0;color:var(--mut);max-width:680px;font-size:14px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.span2{grid-column:span 2}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.card-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:14px}
+.card-h h3{font-size:16px;font-weight:700}
+.card-h small{color:var(--mut);font-size:12px}
+.count{background:var(--red);color:#fff;font-weight:700;font-size:12px;border-radius:999px;padding:2px 9px}
+.kpis-4{grid-template-columns:repeat(4,1fr)}
+
+/* charts */
+.chart svg{width:100%;height:auto;display:block}
+.chart text{font-size:11px;fill:var(--mut);font-family:inherit}
+.chart .grid{stroke:var(--line)}
+.line{fill:none;stroke:var(--red);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.area{fill:rgba(227,0,22,.08)}
+.dot{fill:var(--red);stroke:#fff;stroke-width:2}
+.stack{display:flex;height:16px;border-radius:99px;overflow:hidden;gap:2px}
+.stack i{display:block}
+.legend{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.legend li{display:flex;align-items:center;gap:8px;font-size:13px}
+.legend li i{width:10px;height:10px;border-radius:3px}
+.legend b{margin-left:auto}
+.legend small{color:var(--mut);width:36px;text-align:right}
+
+/* alerts / schedule */
+.alerts,.sched,.plain{list-style:none;margin:0;padding:0}
+.al{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:10px;border-left:4px solid var(--line);background:var(--alt);margin-bottom:8px;font-size:13px;cursor:pointer}
+.al span{color:var(--mut);font-size:12px}
+.al-high{border-left-color:var(--red);background:#fff1f2}
+.al-mid{border-left-color:var(--orange);background:#fff6ef}
+.al-low{border-left-color:var(--yellow);background:#fffbe8}
+.sched li{display:grid;grid-template-columns:200px 90px 1fr auto;gap:12px;align-items:center;padding:11px 4px;border-bottom:1px solid var(--line);font-size:13px;cursor:pointer}
+.sched li:last-child{border:0}
+.sched li:hover{background:var(--alt)}
+.sched em{font-style:normal;color:var(--mut);font-size:12px}
+.sched em.now{color:var(--orange);font-weight:700}.sched em.late{color:var(--red);font-weight:700}
+.tag{display:inline-block;font-size:11px;font-weight:600;background:#f1ecf6;color:var(--purple);padding:3px 9px;border-radius:99px;width:fit-content}
+
+/* kandang */
+.kd-h{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.kd h4{font-size:14px;font-weight:700}
+.kd-m{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.kd-m b{display:block;font-size:20px;font-weight:900}.kd-m small{font-size:11px;color:var(--mut)}
+.kd-f{display:flex;gap:8px}.kd-f input{flex:1;min-width:0}
+.pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.pill-ok{background:#e8f6ec;color:#17803d}.pill-low{background:#fffbe8;color:#8a6d00}.pill-mid{background:#fff0e4;color:#b24a00}.pill-high{background:#fde8ea;color:var(--red)}
+
+/* table */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+input,select{font:inherit;font-size:13px;padding:9px 12px;border:1px solid #ddd;border-radius:10px;background:#fff;color:var(--ink);min-width:0}
+input:focus,select:focus,button:focus-visible,tr:focus-visible,li:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+.tools input[type=search]{flex:1;min-width:200px;max-width:320px}
+.tools .muted{margin-left:auto}
+.table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:820px}
+th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding:12px 14px;border-bottom:1px solid var(--line);background:#fcfcfc;position:sticky;top:0}
+td{padding:11px 14px;border-bottom:1px solid var(--line)}
+tbody tr{cursor:pointer}tbody tr:hover{background:#fff7f8}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--mut)}
+.empty{text-align:center;color:var(--mut);padding:30px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600}
+.chip::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+
+/* pains */
+.pains .n{font-weight:900;font-size:30px;color:var(--red);display:block;margin-bottom:8px}
+.pains h4{font-size:16px;margin-bottom:8px}.pains p{margin:0;color:var(--mut);font-size:14px}
+.stack-tools{margin-top:30px}.stack-tools h4{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.tools-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tools-list li{border:1px solid var(--line);padding:7px 14px;border-radius:99px;font-size:13px;font-weight:500;background:#fff}
+
+.cta-band{background:var(--red);color:#fff;padding:60px 0;text-align:center}
+.cta-band h2{font-weight:900;font-size:clamp(24px,3.4vw,38px)}
+.cta-band p{margin:10px auto 26px;max-width:520px;opacity:.92}
+.cta-band .cta{justify-content:center}
+footer{padding:0 0 28px;background:#fff}
+footer .dna{margin:0 0 22px}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font-size:14px}
+.foot b{font-weight:900;color:var(--red)}.foot small{color:var(--mut)}
+
+/* drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:#fff;z-index:50;box-shadow:-20px 0 60px -20px rgba(0,0,0,.35);transform:translateX(105%);transition:transform .25s ease;overflow-y:auto;padding:22px}
+.drawer.open{transform:none}
+.dr-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.dr-head small{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+.dr-head h3{font-size:26px;font-weight:900}
+.dr-head .chip{margin-left:auto}
+.x{border:0;background:var(--alt);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:14px}
+.profile{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin:0 0 16px;padding:14px;background:var(--alt);border-radius:12px}
+.profile dt{font-size:11px;color:var(--mut)}.profile dd{margin:0;font-size:13px;font-weight:600;word-break:break-word}
+.note{background:#fff1f2;border-left:4px solid var(--red);padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:14px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.tabs button{font:inherit;font-size:13px;font-weight:600;background:none;border:0;padding:10px 14px;cursor:pointer;color:var(--mut);border-bottom:3px solid transparent}
+.tabs button.on{color:var(--red);border-color:var(--red)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px}
+.tiles div{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.tiles small{display:block;font-size:11px;color:var(--mut)}.tiles b{font-size:17px;font-weight:900}.tiles b.sm{font-size:13px}
+.dr-body h5{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:18px 0 8px}
+.plain li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.trend{width:100%;max-width:300px;height:auto}
+.rec-form{display:grid;gap:12px}
+.rec-form label{display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--mut)}
+.rec-form input,.rec-form select{width:100%}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#rec-fields{display:grid;gap:12px}
+.status-form{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);grid-template-columns:1fr auto;align-items:end}
+.timeline{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 18px 16px;font-size:13px}
+.timeline li::before{content:"";position:absolute;left:-22px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid #fff}
+.timeline li.terjadwal::before{background:#fff;border:2px solid var(--orange)}
+.timeline time{display:block;font-size:11px;color:var(--mut);margin-bottom:3px}
+.timeline p{margin:5px 0 2px}.timeline small{color:var(--mut)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:60}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:960px){
+  .links{display:none}.role{margin-left:auto}
+  .kpis,.kpis-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr}.span2{grid-column:auto}
+  .sched li{grid-template-columns:1fr auto;gap:4px 10px}.sched li .tag{grid-column:1/-1}
+}
+@media(max-width:520px){
+  .brand-sub{display:none}.nav-in{gap:10px}
+  .tiles{grid-template-columns:repeat(2,1fr)}.profile{grid-template-columns:1fr}
+  .hero{padding-top:40px}
+}
+@media print{.nav,.drawer,.cta,.cta-band,.tools{display:none}.sec{padding:24px 0}}
+.grid-3>*{min-width:0}
+.kd-f input{width:0}
+.kd-m{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+</style>
 </head>
 <body>
 
@@ -128,7 +316,462 @@
 <aside id="drawer" class="drawer" aria-label="Detail sapi"></aside>
 <div id="toast" class="toast" role="status"></div>
 
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script>
+/* Moosa Intelligence — DATA DUMMY untuk prototipe fase 1.
+   Nanti diganti dengan query Supabase (lihat supabase-schema.sql). */
+(function () {
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const R = rng(20261011);
+  const pick = a => a[Math.floor(R() * a.length)];
+  const between = (a, b) => a + R() * (b - a);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const p2 = n => String(n).padStart(2, '0');
+  const fmt = d => d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate());
+  const round = (n, k = 0) => { const f = Math.pow(10, k); return Math.round(n * f) / f; };
+
+  const SIRES = ['SIRE-FH-011', 'SIRE-FH-024', 'SIRE-FH-037', 'SIRE-FH-052'];
+  const PETUGAS = ['Drh. Rina', 'Teknisi Dedi', 'Petugas Kandang A', 'Petugas Kandang B'];
+  const ORIGINS = ['Lembang, Jawa Barat', 'Pangalengan, Jawa Barat', 'Import Australia', 'Boyolali, Jawa Tengah'];
+  const MARKERS = ['MooMILK (β-lactoglobulin)', 'κ-Casein', 'DGAT1', 'Marker lain'];
+
+  const cows = [];
+  let n = 0;
+  function mk(o) {
+    n++;
+    const dob = addDays(today, -Math.round(o.ageM * 30.4));
+    const adults = cows.filter(c => c.ageM > 40 && c.sex === 'Betina');
+    let dam = 'Tidak tercatat', origin = pick(ORIGINS), arrival;
+    if (o.farmBorn && adults.length) {
+      dam = pick(adults).eartag; origin = 'Lahir di Moosa Farm'; arrival = fmt(dob);
+    } else {
+      const off = Math.min(o.ageM - 1, 6 + Math.floor(R() * 18));
+      arrival = fmt(addDays(dob, Math.round(off * 30.4)));
+    }
+    cows.push({
+      id: 'c' + n, eartag: 'MG-' + (1000 + n),
+      rfid: '900' + String(Math.floor(R() * 1e12)).padStart(12, '0'),
+      dob: fmt(dob), breed: o.breed || 'Frisian Holstein (FH)', sex: o.sex || 'Betina',
+      dam, sire: pick(SIRES), origin, arrival, kandang: o.k, status: o.status,
+      laktasi: !!o.laktasi, ageM: o.ageM, group: o.group, catatanSakit: o.sick || '', stagnan: !!o.stagnan
+    });
+  }
+
+  for (let i = 0; i < 11; i++) mk({ ageM: 40 + Math.floor(R() * 40), status: 'Laktasi', laktasi: true, k: 'A', group: 'lakt' });
+  for (let i = 0; i < 4; i++) mk({ ageM: 42 + Math.floor(R() * 36), status: 'Bunting', k: 'B', group: 'bunting' });
+  for (let i = 0; i < 3; i++) mk({ ageM: 48 + Math.floor(R() * 30), status: 'Kering', k: 'B', group: 'kering' });
+  mk({ ageM: 52, status: 'Sakit', laktasi: true, k: 'A', group: 'sakit', sick: 'Suspek mastitis kuartir kiri belakang' });
+  mk({ ageM: 61, status: 'Sakit', laktasi: true, k: 'A', group: 'sakit', sick: 'Nafsu makan turun, suhu 39.8°C' });
+  for (let i = 0; i < 5; i++) mk({ ageM: 15 + Math.floor(R() * 8), status: 'Dara', k: 'C', group: 'dara', farmBorn: i % 2 === 0, stagnan: i === 3 });
+  mk({ ageM: 3, status: 'Pedet', k: 'C', group: 'pedet', farmBorn: true, sex: 'Betina' });
+  mk({ ageM: 5, status: 'Pedet', k: 'C', group: 'pedet', farmBorn: true, sex: 'Jantan' });
+  mk({ ageM: 2, status: 'Pedet', k: 'C', group: 'pedet', farmBorn: true, sex: 'Betina' });
+
+  const recs = [];
+  let rid = 0;
+  const add = (cow, date, type, data, status, by) =>
+    recs.push({ id: 'r' + (++rid), cowId: cow.id, date: fmt(date), type, status: status || 'selesai', data, by: by || pick(PETUGAS) });
+
+  function bodyWeight(ageM) {
+    if (ageM <= 8) return 45 + ageM * 20;
+    if (ageM <= 24) return 170 + (ageM - 8) * 17;
+    return 540;
+  }
+
+  cows.forEach(c => {
+    const adult = c.ageM > 24;
+    const base = bodyWeight(c.ageM) + (adult ? between(-30, 50) : between(-8, 8));
+    const slope = c.stagnan ? 0 : (adult ? between(-2, 5) : 21);
+    for (let m = 3; m >= 0; m--) {
+      const bb = base - slope * m + between(-3, 3);
+      add(c, addDays(today, -m * 30 - Math.floor(R() * 4)), 'tubuh', {
+        bb: round(bb, 1), tinggi: round(70 + bb * 0.12, 0), lingkar: round(80 + bb * 0.2, 0), panjang: round(60 + bb * 0.18, 0)
+      }, 'selesai');
+    }
+    if (adult) {
+      add(c, addDays(today, -45), 'bcs', { skor: round(between(2.75, 3.5) * 4, 0) / 4 });
+      add(c, addDays(today, -12), 'bcs', { skor: round(between(2.75, 3.5) * 4, 0) / 4 });
+      add(c, addDays(today, -2), 'pakan', { pakan: 'Hijauan (rumput gajah)', jumlah: round(between(26, 34), 0) });
+      add(c, addDays(today, -2), 'pakan', { pakan: 'Konsentrat laktasi', jumlah: round(between(6, 8.5), 1) });
+    } else {
+      add(c, addDays(today, -2), 'pakan', { pakan: c.ageM < 6 ? 'Susu + calf starter' : 'Hijauan + konsentrat dara', jumlah: round(between(3, 12), 1) });
+    }
+    if (c.laktasi) {
+      const low = c.group === 'sakit';
+      for (let d = 6; d >= 0; d--) {
+        add(c, addDays(today, -d), 'susu', {
+          pagi: round(low ? between(2, 3.5) : between(7.5, 11), 1), sore: round(low ? between(1.5, 3) : between(5.5, 9), 1)
+        });
+      }
+    }
+  });
+
+  const by = g => cows.filter(c => c.group === g);
+
+  // Riwayat reproduksi
+  by('bunting').concat(by('kering')).forEach((c, i) => {
+    const ibAgo = 100 + i * 17;
+    if (i % 2 === 0) add(c, addDays(today, -ibAgo - 21), 'ib', { straw: pick(SIRES), inseminator: 'Drh. Rina' });
+    add(c, addDays(today, -ibAgo), 'ib', { straw: pick(SIRES), inseminator: 'Drh. Rina' });
+    add(c, addDays(today, -ibAgo + 35), 'pkb', { hasil: 'Bunting', metode: 'Palpasi rektal' });
+    add(c, addDays(today, -ibAgo + 60), 'usg', { temuan: 'Fetus hidup, detak jantung terlihat', umur_bunting: 60 });
+  });
+  by('lakt').slice(5, 9).forEach((c, i) => {
+    add(c, addDays(today, -60 - i * 9), 'ib', { straw: pick(SIRES), inseminator: 'Teknisi Dedi' });
+    add(c, addDays(today, -25 - i * 3), 'pkb', { hasil: i % 2 ? 'Tidak bunting' : 'Belum pasti', metode: 'USG' });
+  });
+  by('dara').slice(0, 3).forEach((c, i) => {
+    add(c, addDays(today, -40 - i * 7), 'ib', { straw: pick(SIRES), inseminator: 'Drh. Rina' });
+  });
+
+  // Jadwal ke depan
+  const L = by('lakt');
+  add(L[0], today, 'birahi', { tanda: 'Prediksi birahi (siklus 21 hari)' }, 'terjadwal');
+  add(L[1], addDays(today, 1), 'birahi', { tanda: 'Prediksi birahi (siklus 21 hari)' }, 'terjadwal');
+  add(L[2], addDays(today, 2), 'hormon', { obat: 'PGF2α (sinkronisasi)', dosis: 2 }, 'terjadwal');
+  add(L[3], addDays(today, 3), 'ib', { straw: SIRES[1], inseminator: 'Drh. Rina' }, 'terjadwal');
+  add(L[4], addDays(today, -30), 'ib', { straw: SIRES[0], inseminator: 'Teknisi Dedi' });
+  add(L[4], addDays(today, 5), 'pkb', { hasil: '', metode: 'Palpasi rektal' }, 'terjadwal');
+  add(by('dara')[0], addDays(today, 4), 'usg', { temuan: '', umur_bunting: '' }, 'terjadwal');
+  add(by('dara')[1], addDays(today, -1), 'pkb', { hasil: '', metode: 'USG' }, 'terjadwal');
+
+  // Genetika
+  cows.filter(c => c.ageM > 14).slice(0, 14).forEach(c => {
+    add(c, addDays(today, -150), 'dna', { marker: MARKERS[0], hasil: pick(['A/A', 'A/B', 'A/B', 'B/B']) });
+    add(c, addDays(today, -150), 'dna', { marker: MARKERS[1], hasil: pick(['A/A', 'A/B', 'B/B']) });
+  });
+
+  // Metricheck
+  [L[5], L[6], L[7]].forEach((c, i) => add(c, addDays(today, -20 - i * 5), 'metricheck', {
+    hasil: i === 1 ? 'Endometritis ringan' : 'Normal', catatan: i === 1 ? 'Lendir keruh, pantau 2 minggu' : ''
+  }));
+
+  // Treatment
+  by('sakit').forEach((c, i) => add(c, addDays(today, -i), 'treatment', {
+    tindakan: 'Pengobatan', obat: i === 0 ? 'Antibiotik intramamari (dummy)' : 'Antipiretik + vitamin (dummy)', dosis: i === 0 ? 10 : 20, catatan: c.catatanSakit
+  }));
+  cows.filter(c => c.ageM > 6).slice(0, 8).forEach(c => add(c, addDays(today, -35), 'treatment', {
+    tindakan: 'Vaksinasi', obat: 'Vaksin PMK (dummy batch)', dosis: 2, catatan: 'Dosis 1'
+  }));
+
+  const kandang = [
+    { id: 'A', nama: 'Kandang A — Laktasi', temp: 25.5, hum: 70 },
+    { id: 'B', nama: 'Kandang B — Bunting & Kering', temp: 28.0, hum: 65 },
+    { id: 'C', nama: 'Kandang C — Dara & Pedet', temp: 24.2, hum: 76 }
+  ];
+
+  const milkSeries = [];
+  for (let d = 29; d >= 0; d--) {
+    const liter = 168 + (29 - d) * 0.5 + between(-7, 7);
+    milkSeries.push({ date: fmt(addDays(today, -d)), liter: round(liter, 0) });
+  }
+
+  window.MOOSA_DATA = { cows, records: recs, kandang, milkSeries, SIRES, MARKERS };
+})();
+
+/* Moosa Intelligence — logika dashboard (prototipe, data dummy + localStorage) */
+(function () {
+  const D = window.MOOSA_DATA;
+  const KEY = 'moosa-intel-demo-v1';
+  const state = { role: 'admin', q: '', fStatus: '', fBreed: '', fK: '', selected: null, tab: 'ringkasan', extra: { records: [], cowStatus: {}, kandang: {} } };
+  try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) state.extra = Object.assign(state.extra, s); } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state.extra)); } catch (e) {} };
+
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const pd = s => new Date(s + 'T00:00:00');
+  const p2 = n => String(n).padStart(2, '0');
+  const fmtISO = d => d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate());
+  const fmtDate = s => s ? pd(s).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-';
+  const fmtShort = s => pd(s).toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
+  const num = (n, k = 0) => Number(n).toLocaleString('id-ID', { minimumFractionDigits: k, maximumFractionDigits: k });
+
+  const ROLES = { admin: 'Admin', teknis: 'Tim Teknis', lapangan: 'Lapangan', board: 'Board' };
+  const canEdit = () => state.role !== 'board';
+
+  const allRecords = () => D.records.concat(state.extra.records);
+  const cowStatus = c => state.extra.cowStatus[c.id] || c.status;
+  const kandangs = () => D.kandang.map(k => Object.assign({}, k, state.extra.kandang[k.id] || {}));
+  const recsOf = id => allRecords().filter(r => r.cowId === id);
+  const latest = (id, type) => recsOf(id).filter(r => r.type === type && r.status === 'selesai').sort((a, b) => b.date.localeCompare(a.date))[0];
+
+  function ageMonths(dob) {
+    const d = pd(dob);
+    return (today.getFullYear() - d.getFullYear()) * 12 + today.getMonth() - d.getMonth() - (today.getDate() < d.getDate() ? 1 : 0);
+  }
+  function ageText(dob) {
+    const m = ageMonths(dob);
+    return m >= 12 ? Math.floor(m / 12) + ' th ' + (m % 12) + ' bln' : m + ' bln';
+  }
+  const thi = (t, rh) => Math.round((1.8 * t + 32) - (0.55 - 0.0055 * rh) * (1.8 * t - 26));
+  const dayDiff = s => Math.round((pd(s) - today) / 864e5);
+
+  /* ---------- Definisi form input ---------- */
+  const TYPES = {
+    tubuh: { label: 'Pengukuran tubuh', f: [['bb', 'Berat badan (kg)', 'number'], ['tinggi', 'Tinggi badan (cm)', 'number'], ['lingkar', 'Lingkar dada (cm)', 'number'], ['panjang', 'Panjang badan (cm)', 'number']] },
+    susu: { label: 'Produksi susu', f: [['pagi', 'Pagi (liter)', 'number'], ['sore', 'Sore (liter)', 'number']] },
+    treatment: { label: 'Treatment / tindakan', f: [['tindakan', 'Jenis tindakan', 'select', ['Pengobatan', 'Vaksinasi', 'Vitamin', 'Obat cacing', 'Lainnya']], ['obat', 'Nama obat', 'text'], ['dosis', 'Dosis (ml)', 'number'], ['catatan', 'Catatan', 'text']] },
+    pakan: { label: 'Pemberian pakan', f: [['pakan', 'Jenis pakan', 'text'], ['jumlah', 'Jumlah (kg)', 'number']] },
+    dna: { label: 'Hasil tes DNA', f: [['marker', 'Marker', 'select', D.MARKERS], ['hasil', 'Hasil (alel)', 'select', ['A/A', 'A/B', 'B/B']]] },
+    metricheck: { label: 'Pemeriksaan Metricheck', f: [['hasil', 'Hasil', 'select', ['Normal', 'Endometritis ringan', 'Endometritis sedang', 'Endometritis berat']], ['catatan', 'Catatan', 'text']] },
+    bcs: { label: 'Pemeriksaan BCS', f: [['skor', 'Skor BCS (1–5)', 'number']] },
+    birahi: { label: 'Birahi', f: [['tanda', 'Tanda / catatan', 'text']] },
+    hormon: { label: 'Pemberian hormon', f: [['obat', 'Obat / hormon', 'text'], ['dosis', 'Dosis (ml)', 'number']] },
+    ib: { label: 'Inseminasi Buatan (IB)', f: [['straw', 'Straw pejantan', 'select', D.SIRES], ['inseminator', 'Inseminator', 'text']] },
+    pkb: { label: 'PKB (cek kebuntingan)', f: [['hasil', 'Hasil', 'select', ['', 'Bunting', 'Tidak bunting', 'Belum pasti']], ['metode', 'Metode', 'select', ['Palpasi rektal', 'USG']]] },
+    usg: { label: 'USG', f: [['temuan', 'Temuan', 'text'], ['umur_bunting', 'Umur kebuntingan (hari)', 'number']] }
+  };
+  const LABELS = { bb: 'BB', tinggi: 'Tinggi', lingkar: 'L. dada', panjang: 'P. badan', pagi: 'Pagi', sore: 'Sore', tindakan: '', obat: '', dosis: 'dosis', catatan: '', pakan: '', jumlah: 'kg', marker: '', hasil: '', skor: 'Skor', tanda: '', straw: 'Straw', inseminator: 'oleh', metode: '', temuan: '', umur_bunting: 'hari bunting' };
+  const UNITS = { bb: ' kg', tinggi: ' cm', lingkar: ' cm', panjang: ' cm', pagi: ' L', sore: ' L', dosis: ' ml', jumlah: ' kg' };
+  function summarize(r) {
+    const parts = [];
+    Object.keys(r.data || {}).forEach(k => {
+      const v = r.data[k]; if (v === '' || v == null) return;
+      const lab = LABELS[k] || '';
+      if (UNITS[k]) parts.push((lab && k !== 'dosis' ? lab + ' ' : '') + v + UNITS[k]);
+      else parts.push((lab ? lab + ': ' : '') + v);
+    });
+    return parts.join(' · ') || '—';
+  }
+
+  /* ---------- KPI ---------- */
+  function kpi() {
+    const cows = D.cows;
+    const status = {};
+    cows.forEach(c => { const s = cowStatus(c); status[s] = (status[s] || 0) + 1; });
+    const sick = status['Sakit'] || 0;
+    const milkToday = D.milkSeries[D.milkSeries.length - 1].liter;
+    const milkers = cows.filter(c => c.laktasi).length;
+    const adultsF = cows.filter(c => c.sex === 'Betina' && ageMonths(c.dob) >= 15);
+    const bunting = (status['Bunting'] || 0) + (status['Kering'] || 0);
+    const ibDone = allRecords().filter(r => r.type === 'ib' && r.status === 'selesai').length;
+    const conc = new Set(allRecords().filter(r => r.type === 'pkb' && r.data.hasil === 'Bunting').map(r => r.cowId)).size;
+    return {
+      total: cows.length, status, sick, healthPct: Math.round((cows.length - sick) / cows.length * 100),
+      milkToday, milkers, avgMilk: milkToday / milkers,
+      pr: Math.round(bunting / adultsF.length * 100), sc: conc ? ibDone / conc : 0,
+      cr: 86, daysOpen: 118 /* dummy */
+    };
+  }
+
+  function alerts() {
+    const a = [];
+    D.cows.forEach(c => { if (cowStatus(c) === 'Sakit') a.push({ lvl: 'high', t: c.eartag + ' — sakit', d: c.catatanSakit || 'Perlu pemeriksaan lanjutan', cow: c.id }); });
+    kandangs().forEach(k => { const t = thi(k.temp, k.hum); if (t >= 75) a.push({ lvl: t >= 78 ? 'high' : 'mid', t: k.nama.split(' — ')[0] + ': THI ' + Math.round(t), d: 'Suhu ' + k.temp + '°C, RH ' + k.hum + '% — risiko cekaman panas' }); });
+    schedule().forEach(s => { if (s.diff <= 1) a.push({ lvl: s.diff < 0 ? 'high' : 'mid', t: TYPES[s.r.type].label + ' ' + cowOf(s.r).eartag, d: s.diff < 0 ? 'Terlambat ' + (-s.diff) + ' hari' : (s.diff === 0 ? 'Jadwal hari ini' : 'Jadwal besok'), cow: s.r.cowId }); });
+    D.cows.filter(c => c.stagnan).forEach(c => a.push({ lvl: 'low', t: c.eartag + ' — BB stagnan', d: 'Tidak ada pertambahan bobot 3 bulan terakhir', cow: c.id }));
+    const o = { high: 0, mid: 1, low: 2 };
+    return a.sort((x, y) => o[x.lvl] - o[y.lvl]);
+  }
+  const cowOf = r => D.cows.find(c => c.id === r.cowId);
+  function schedule() {
+    return allRecords().filter(r => r.status === 'terjadwal').map(r => ({ r, diff: dayDiff(r.date) })).sort((a, b) => a.diff - b.diff);
+  }
+
+  /* ---------- Render: dashboard ---------- */
+  function renderKpis() {
+    const k = kpi();
+    $('#kpis').innerHTML = [
+      ['Total sapi', num(k.total), k.milkers + ' laktasi · ' + (k.status['Bunting'] || 0) + ' bunting'],
+      ['Produksi susu hari ini', num(k.milkToday) + ' L', 'rata-rata ' + num(k.avgMilk, 1) + ' L/ekor laktasi'],
+      ['Kesehatan herd', k.healthPct + '%', k.sick + ' sapi sakit dari ' + k.total],
+      ['Alert aktif', alerts().length, 'perlu tindak lanjut hari ini']
+    ].map((x, i) => `<div class="kpi ${i === 3 ? 'kpi-alert' : ''}"><span>${x[0]}</span><b>${x[1]}</b><small>${x[2]}</small></div>`).join('');
+    $('#repro-kpis').innerHTML = [
+      ['Calving rate', k.cr + '%', 'target ≥ 85%'],
+      ['Pregnancy rate', k.pr + '%', 'betina dewasa bunting'],
+      ['Service per conception', num(k.sc, 1), 'target ≤ 2,0'],
+      ['Days open (rata-rata)', k.daysOpen + ' hr', 'target ≤ 120']
+    ].map(x => `<div class="kpi kpi-sm"><span>${x[0]}</span><b>${x[1]}</b><small>${x[2]}</small></div>`).join('');
+  }
+
+  function renderMilk() {
+    const s = D.milkSeries, W = 640, H = 210, pl = 38, pb = 24, pt = 12, pr = 10;
+    const min = Math.floor(Math.min(...s.map(x => x.liter)) / 10) * 10 - 10, max = Math.ceil(Math.max(...s.map(x => x.liter)) / 10) * 10 + 5;
+    const x = i => pl + i * (W - pl - pr) / (s.length - 1), y = v => pt + (max - v) / (max - min) * (H - pt - pb);
+    const line = s.map((p, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(p.liter).toFixed(1)).join(' ');
+    let grid = '';
+    for (let i = 0; i <= 3; i++) { const v = min + (max - min) * i / 3; grid += `<line x1="${pl}" x2="${W - pr}" y1="${y(v)}" y2="${y(v)}" class="grid"/><text x="${pl - 6}" y="${y(v) + 4}" text-anchor="end">${Math.round(v)}</text>`; }
+    $('#milk-chart').innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Produksi susu 30 hari terakhir">${grid}
+      <path d="${line} L${x(s.length - 1)} ${H - pb} L${pl} ${H - pb} Z" class="area"/><path d="${line}" class="line"/>
+      <circle cx="${x(s.length - 1)}" cy="${y(s[s.length - 1].liter)}" r="4.5" class="dot"/>
+      <text x="${pl}" y="${H - 6}">${fmtShort(s[0].date)}</text><text x="${W - pr}" y="${H - 6}" text-anchor="end">${fmtShort(s[s.length - 1].date)}</text></svg>`;
+  }
+
+  const SCOL = { Laktasi: '#e30016', Bunting: '#370c5e', Kering: '#8a8a8a', Dara: '#ff7a2e', Pedet: '#feda45', Sakit: '#333333' };
+  function renderStatus() {
+    const k = kpi(), tot = k.total;
+    const order = ['Laktasi', 'Bunting', 'Kering', 'Dara', 'Pedet', 'Sakit'];
+    $('#status-bar').innerHTML = order.filter(o => k.status[o]).map(o => `<i style="flex:${k.status[o]};background:${SCOL[o]}" title="${o}: ${k.status[o]}"></i>`).join('');
+    $('#status-legend').innerHTML = order.filter(o => k.status[o]).map(o => `<li><i style="background:${SCOL[o]}"></i>${o}<b>${k.status[o]}</b><small>${Math.round(k.status[o] / tot * 100)}%</small></li>`).join('');
+  }
+
+  function renderAlerts() {
+    const a = alerts();
+    $('#alerts').innerHTML = a.length ? a.slice(0, 7).map(x => `<li class="al al-${x.lvl}" ${x.cow ? `data-action="open-cow" data-id="${x.cow}" tabindex="0"` : ''}><b>${esc(x.t)}</b><span>${esc(x.d)}</span></li>`).join('') : '<li class="al">Tidak ada alert aktif 🎉</li>';
+    $('#alert-count').textContent = a.length;
+  }
+
+  function renderSchedule() {
+    const s = schedule().slice(0, 8);
+    $('#schedule').innerHTML = s.map(x => {
+      const when = x.diff < 0 ? `<em class="late">terlambat ${-x.diff} hr</em>` : x.diff === 0 ? '<em class="now">hari ini</em>' : x.diff === 1 ? '<em>besok</em>' : `<em>${x.diff} hari lagi</em>`;
+      return `<li data-action="open-cow" data-id="${x.r.cowId}" tabindex="0"><span class="tag">${esc(TYPES[x.r.type].label)}</span><b>${esc(cowOf(x.r).eartag)}</b><span>${fmtShort(x.r.date)}</span>${when}</li>`;
+    }).join('');
+  }
+
+  function renderKandang() {
+    $('#kandang').innerHTML = kandangs().map(k => {
+      const t = thi(k.temp, k.hum);
+      const lv = t >= 78 ? ['Stres berat', 'high'] : t >= 75 ? ['Waspada', 'mid'] : t >= 72 ? ['Stres ringan', 'low'] : ['Nyaman', 'ok'];
+      const n = D.cows.filter(c => c.kandang === k.id).length;
+      return `<div class="card kd"><div class="kd-h"><h4>${esc(k.nama)}</h4><span class="pill pill-${lv[1]}">${lv[0]}</span></div>
+        <div class="kd-m"><div><b>${k.temp}°C</b><small>Suhu</small></div><div><b>${k.hum}%</b><small>Kelembapan</small></div><div><b>${Math.round(t)}</b><small>THI</small></div><div><b>${n}</b><small>Ekor</small></div></div>
+        ${canEdit() ? `<form class="kd-f" data-form="kandang" data-id="${k.id}"><input name="temp" type="number" step="0.1" placeholder="Suhu °C" required><input name="hum" type="number" step="1" placeholder="RH %" required><button class="btn btn-sm" type="submit">Catat</button></form>` : ''}</div>`;
+    }).join('');
+  }
+
+  /* ---------- Render: daftar sapi ---------- */
+  function filtered() {
+    const q = state.q.trim().toLowerCase();
+    return D.cows.filter(c => (!q || (c.eartag + ' ' + c.rfid + ' ' + c.breed).toLowerCase().includes(q))
+      && (!state.fStatus || cowStatus(c) === state.fStatus) && (!state.fBreed || c.breed === state.fBreed) && (!state.fK || c.kandang === state.fK));
+  }
+  function renderTable() {
+    const rows = filtered();
+    $('#cow-count').textContent = rows.length + ' dari ' + D.cows.length + ' ekor';
+    $('#cow-body').innerHTML = rows.map(c => {
+      const bb = latest(c.id, 'tubuh'), ms = recsOf(c.id).filter(r => r.type === 'susu' && r.status === 'selesai').sort((a, b) => b.date.localeCompare(a.date))[0];
+      const st = cowStatus(c);
+      return `<tr data-action="open-cow" data-id="${c.id}" tabindex="0"><td><b>${c.eartag}</b></td><td class="mono">${c.rfid}</td><td>${esc(c.breed)}</td><td>${c.sex === 'Betina' ? '♀' : '♂'}</td><td>${ageText(c.dob)}</td><td>${c.kandang}</td><td><span class="chip" style="--c:${SCOL[st]}">${st}</span></td><td>${bb ? bb.data.bb + ' kg' : '-'}</td><td>${ms ? num(+ms.data.pagi + +ms.data.sore, 1) + ' L' : '-'}</td></tr>`;
+    }).join('') || '<tr><td colspan="9" class="empty">Tidak ada sapi yang cocok dengan filter.</td></tr>';
+  }
+  function fillFilters() {
+    const uniq = a => Array.from(new Set(a));
+    $('#f-status').innerHTML = '<option value="">Semua status</option>' + uniq(D.cows.map(c => c.status)).map(s => `<option>${s}</option>`).join('');
+    $('#f-breed').innerHTML = '<option value="">Semua jenis</option>' + uniq(D.cows.map(c => c.breed)).map(s => `<option>${s}</option>`).join('');
+    $('#f-k').innerHTML = '<option value="">Semua kandang</option>' + D.kandang.map(k => `<option value="${k.id}">${esc(k.nama)}</option>`).join('');
+  }
+
+  /* ---------- Drawer ---------- */
+  function trendSvg(vals) {
+    if (vals.length < 2) return '';
+    const W = 260, H = 64, mn = Math.min(...vals), mx = Math.max(...vals), sp = (mx - mn) || 1;
+    const pts = vals.map((v, i) => [6 + i * (W - 12) / (vals.length - 1), 8 + (mx - v) / sp * (H - 16)]);
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend"><path d="${pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ')}" class="line"/>${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="3" class="dot"/>`).join('')}</svg>`;
+  }
+  function renderDrawer() {
+    const el = $('#drawer');
+    const c = D.cows.find(x => x.id === state.selected);
+    if (!c) { el.classList.remove('open'); el.innerHTML = ''; document.body.classList.remove('lock'); return; }
+    const st = cowStatus(c), recs = recsOf(c.id);
+    const tubuh = recs.filter(r => r.type === 'tubuh' && r.status === 'selesai').sort((a, b) => a.date.localeCompare(b.date));
+    const lt = tubuh[tubuh.length - 1], bcs = latest(c.id, 'bcs'), mc = latest(c.id, 'metricheck');
+    const dna = recs.filter(r => r.type === 'dna').sort((a, b) => b.date.localeCompare(a.date));
+    const sched = recs.filter(r => r.status === 'terjadwal').sort((a, b) => a.date.localeCompare(b.date));
+    const profile = [['Eartag', c.eartag], ['RFID', c.rfid], ['Tanggal lahir', fmtDate(c.dob)], ['Jenis sapi', c.breed], ['Jenis kelamin', c.sex], ['Dam / induk', c.dam], ['Sire / pejantan', c.sire], ['Asal', c.origin], ['Tanggal kedatangan', fmtDate(c.arrival)], ['Usia saat ini', ageText(c.dob)]];
+    const tabs = [['ringkasan', 'Ringkasan']].concat(canEdit() ? [['input', 'Input data']] : []).concat([['riwayat', 'Riwayat']]);
+    if (!tabs.find(t => t[0] === state.tab)) state.tab = 'ringkasan';
+    let body = '';
+    if (state.tab === 'ringkasan') {
+      body = `<div class="tiles">
+        <div><small>Berat badan</small><b>${lt ? lt.data.bb + ' kg' : '-'}</b></div><div><small>Tinggi</small><b>${lt ? lt.data.tinggi + ' cm' : '-'}</b></div>
+        <div><small>Lingkar dada</small><b>${lt ? lt.data.lingkar + ' cm' : '-'}</b></div><div><small>Panjang badan</small><b>${lt ? lt.data.panjang + ' cm' : '-'}</b></div>
+        <div><small>BCS</small><b>${bcs ? bcs.data.skor : '-'}</b></div><div><small>Metricheck</small><b class="sm">${mc ? esc(mc.data.hasil) : '-'}</b></div></div>
+        ${tubuh.length > 1 ? `<h5>Tren berat badan</h5>${trendSvg(tubuh.map(r => +r.data.bb))}<p class="muted">ADG ≈ ${num((tubuh[tubuh.length - 1].data.bb - tubuh[0].data.bb) / Math.max(1, (pd(tubuh[tubuh.length - 1].date) - pd(tubuh[0].date)) / 864e5), 2)} kg/hari</p>` : ''}
+        <h5>Hasil tes DNA</h5>${dna.length ? `<ul class="plain">${dna.map(r => `<li><span>${esc(r.data.marker)}</span><b>${esc(r.data.hasil)}</b></li>`).join('')}</ul>` : '<p class="muted">Belum ada hasil tes DNA.</p>'}
+        <h5>Jadwal mendatang</h5>${sched.length ? `<ul class="plain">${sched.map(r => `<li><span>${TYPES[r.type].label}</span><b>${fmtDate(r.date)}</b></li>`).join('')}</ul>` : '<p class="muted">Tidak ada jadwal.</p>'}`;
+    } else if (state.tab === 'input') {
+      body = `<form data-form="record" class="rec-form"><input type="hidden" name="cow" value="${c.id}">
+        <label>Jenis data<select name="type" id="rec-type">${Object.keys(TYPES).map(k => `<option value="${k}">${TYPES[k].label}</option>`).join('')}</select></label>
+        <div class="row2"><label>Tanggal<input type="date" name="date" value="${fmtISO(today)}" required></label>
+        <label>Status<select name="status"><option value="selesai">Sudah dilakukan</option><option value="terjadwal">Terjadwal</option></select></label></div>
+        <div id="rec-fields"></div><button class="btn" type="submit">Simpan catatan</button></form>
+        <form data-form="status" class="rec-form status-form"><input type="hidden" name="cow" value="${c.id}"><label>Ubah status sapi<select name="status">${['Laktasi', 'Bunting', 'Kering', 'Dara', 'Pedet', 'Sakit'].map(s => `<option ${s === st ? 'selected' : ''}>${s}</option>`).join('')}</select></label><button class="btn btn-ghost" type="submit">Perbarui</button></form>`;
+    } else {
+      const list = recs.slice().sort((a, b) => b.date.localeCompare(a.date) || (b.id > a.id ? 1 : -1));
+      body = `<ol class="timeline">${list.map(r => `<li class="${r.status}"><time>${fmtDate(r.date)}</time><span class="tag">${esc(TYPES[r.type].label)}${r.status === 'terjadwal' ? ' · terjadwal' : ''}</span><p>${esc(summarize(r))}</p><small>${esc(r.by)}</small></li>`).join('')}</ol>`;
+    }
+    el.innerHTML = `<div class="dr-head"><div><small>Profil sapi</small><h3>${c.eartag}</h3></div><span class="chip" style="--c:${SCOL[st]}">${st}</span><button class="x" data-action="close" aria-label="Tutup">✕</button></div>
+      <dl class="profile">${profile.map(p => `<div><dt>${p[0]}</dt><dd>${esc(p[1])}</dd></div>`).join('')}</dl>
+      ${c.catatanSakit && st === 'Sakit' ? `<div class="note">⚠ ${esc(c.catatanSakit)}</div>` : ''}
+      <div class="tabs">${tabs.map(t => `<button class="${state.tab === t[0] ? 'on' : ''}" data-action="tab" data-tab="${t[0]}">${t[1]}</button>`).join('')}</div><div class="dr-body">${body}</div>`;
+    el.classList.add('open'); document.body.classList.add('lock');
+    if (state.tab === 'input') renderFields();
+  }
+  function renderFields() {
+    const t = $('#rec-type'); if (!t) return;
+    $('#rec-fields').innerHTML = TYPES[t.value].f.map(f => {
+      if (f[2] === 'select') return `<label>${f[1]}<select name="${f[0]}">${f[3].map(o => `<option value="${esc(o)}">${esc(o) || '— belum ada —'}</option>`).join('')}</select></label>`;
+      return `<label>${f[1]}<input name="${f[0]}" type="${f[2]}" ${f[2] === 'number' ? 'step="0.1"' : ''}></label>`;
+    }).join('');
+  }
+
+  /* ---------- Events ---------- */
+  function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 2600); }
+  function renderAll() { renderKpis(); renderMilk(); renderStatus(); renderAlerts(); renderSchedule(); renderKandang(); renderTable(); renderDrawer(); $('#role-note').hidden = canEdit(); }
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-action]'); if (!a) return;
+    const act = a.dataset.action;
+    if (act === 'open-cow') { state.selected = a.dataset.id; state.tab = 'ringkasan'; renderDrawer(); }
+    else if (act === 'close') { state.selected = null; renderDrawer(); }
+    else if (act === 'tab') { state.tab = a.dataset.tab; renderDrawer(); }
+    else if (act === 'export') exportCsv();
+    else if (act === 'reset') { state.extra = { records: [], cowStatus: {}, kandang: {} }; save(); renderAll(); toast('Data demo dikembalikan ke awal'); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && state.selected) { state.selected = null; renderDrawer(); }
+    if ((e.key === 'Enter') && e.target.matches('[data-action="open-cow"]')) e.target.click();
+  });
+  document.addEventListener('change', e => { if (e.target.id === 'rec-type') renderFields(); });
+  document.addEventListener('submit', e => {
+    const f = e.target.closest('form[data-form]'); if (!f) return; e.preventDefault();
+    const fd = Object.fromEntries(new FormData(f).entries());
+    if (f.dataset.form === 'kandang') {
+      state.extra.kandang[f.dataset.id] = { temp: +fd.temp, hum: +fd.hum }; save(); renderAll(); toast('Kondisi kandang diperbarui');
+    } else if (f.dataset.form === 'status') {
+      state.extra.cowStatus[fd.cow] = fd.status; save(); renderAll(); toast('Status sapi diperbarui');
+    } else {
+      const data = {}; TYPES[fd.type].f.forEach(x => { data[x[0]] = fd[x[0]] || ''; });
+      state.extra.records.push({ id: 'x' + Date.now(), cowId: fd.cow, date: fd.date, type: fd.type, status: fd.status, data, by: ROLES[state.role] });
+      save(); state.tab = 'riwayat'; renderAll(); toast('Catatan tersimpan (mode demo — lokal di browser)');
+    }
+  });
+  $('#q').addEventListener('input', e => { state.q = e.target.value; renderTable(); });
+  $('#f-status').addEventListener('change', e => { state.fStatus = e.target.value; renderTable(); });
+  $('#f-breed').addEventListener('change', e => { state.fBreed = e.target.value; renderTable(); });
+  $('#f-k').addEventListener('change', e => { state.fK = e.target.value; renderTable(); });
+  $('#role').addEventListener('change', e => { state.role = e.target.value; renderAll(); });
+
+  function exportCsv() {
+    const head = ['Eartag', 'RFID', 'Tanggal lahir', 'Jenis', 'JK', 'Dam', 'Sire', 'Asal', 'Tgl kedatangan', 'Usia', 'Kandang', 'Status'];
+    const rows = filtered().map(c => [c.eartag, c.rfid, c.dob, c.breed, c.sex, c.dam, c.sire, c.origin, c.arrival, ageText(c.dob), c.kandang, cowStatus(c)]);
+    const csv = [head].concat(rows).map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' })); a.download = 'daftar-sapi-moosa.csv'; a.click();
+  }
+
+  /* Pita DNA dekoratif */
+  function dna() {
+    const W = 1200, A = 13, P = 64; let p1 = '', p2s = '';
+    for (let x = 0; x <= W; x += 4) { const y1 = 20 + A * Math.sin(x / P * Math.PI), y2 = 20 - A * Math.sin(x / P * Math.PI); p1 += (x ? 'L' : 'M') + x + ' ' + y1.toFixed(1); p2s += (x ? 'L' : 'M') + x + ' ' + y2.toFixed(1); }
+    document.querySelectorAll('.dna').forEach(el => { el.innerHTML = `<svg viewBox="0 0 ${W} 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="${p1}" stroke="#e30016" fill="none" stroke-width="3.5"/><path d="${p2s}" stroke="#370c5e" fill="none" stroke-width="3.5"/></svg>`; });
+  }
+
+  const logo = document.querySelector('.logo-img');
+  if (logo) logo.addEventListener('error', () => { logo.style.display = 'none'; document.querySelector('.logo-txt').style.display = 'inline'; });
+
+  fillFilters(); dna(); renderAll();
+})();
+
+</script>
 </body>
 </html>
